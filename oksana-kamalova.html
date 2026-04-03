@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оксана Камалова — Налоговый консультант</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --warm: #f5f0e8;
+    --accent: #2d6a4f;
+    --accent2: #40916c;
+    --gold: #b5832a;
+    --gold-light: #f4d58d;
+    --muted: #6b7280;
+    --border: #e2d9c8;
+    --white: #ffffff;
+    --card-bg: #faf7f2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Golos Text', sans-serif;
+    background: var(--warm);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,240,232,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-size: 0.9rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent); color: var(--white);
+    border: none; border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 5% 60px;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(45,106,79,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(45,106,79,0.1);
+    border: 1px solid rgba(45,106,79,0.25);
+    border-radius: 100px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.82rem; font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+  .hero-title em::after {
+    content: '';
+    position: absolute; bottom: 2px; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem; line-height: 1.75;
+    color: #4a5568; max-width: 480px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--accent); color: var(--white);
+    border: none; border-radius: 10px;
+    padding: 0.85rem 1.8rem;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,106,79,0.25); }
+  .btn-secondary {
+    background: transparent; color: var(--accent);
+    border: 2px solid var(--accent); border-radius: 10px;
+    padding: 0.85rem 1.8rem;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(45,106,79,0.08); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 2.5rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .stat { text-align: left; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.1rem; }
+
+  /* Hero photo area */
+  .hero-visual {
+    position: relative;
+    animation: fadeUp 0.7s 0.15s ease both;
+  }
+  .photo-frame {
+    width: 100%; max-width: 420px;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, #d4e6dc 0%, #b7d4c3 50%, #95bfaa 100%);
+    border-radius: 24px 24px 80px 24px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(45,106,79,0.2);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-placeholder {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    color: var(--accent);
+  }
+  .photo-placeholder svg { opacity: 0.5; }
+  .photo-placeholder p { font-size: 0.85rem; opacity: 0.7; text-align: center; }
+
+  .floating-card {
+    position: absolute;
+    background: var(--white);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    animation: float 4s ease-in-out infinite;
+  }
+  .floating-card.card-left {
+    left: -40px; bottom: 80px;
+    animation-delay: 0s;
+  }
+  .floating-card.card-right {
+    right: -20px; top: 80px;
+    animation-delay: 2s;
+  }
+  .fc-label { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.25rem; }
+  .fc-value { font-size: 1.1rem; font-weight: 700; color: var(--accent); }
+  .fc-icon { font-size: 1.5rem; margin-bottom: 0.25rem; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--ink);
+    padding: 1.2rem 5%;
+    display: flex; align-items: center; justify-content: center;
+    gap: 3rem; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: rgba(255,255,255,0.75); font-size: 0.88rem;
+  }
+  .trust-item span:first-child { font-size: 1.1rem; }
+
+  /* SECTION COMMON */
+  section { padding: 80px 5%; }
+  .section-label {
+    display: inline-block;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700; line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-sub { font-size: 1rem; color: var(--muted); max-width: 540px; line-height: 1.7; }
+
+  /* ABOUT */
+  .about {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .about-text p { color: #4a5568; line-height: 1.8; margin-bottom: 1rem; font-size: 0.97rem; }
+  .about-perks { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+  .perk {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 1rem 1.2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+  }
+  .perk-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .perk-text strong { display: block; font-size: 0.95rem; margin-bottom: 0.2rem; }
+  .perk-text span { font-size: 0.83rem; color: var(--muted); }
+
+  .about-photo {
+    width: 100%; max-width: 380px;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #e8f5ee 0%, #c5dfd0 100%);
+    border-radius: 50% 50% 50% 20px;
+    margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 5rem;
+    box-shadow: 0 16px 48px rgba(45,106,79,0.15);
+  }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .service-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 52px; height: 52px;
+    background: rgba(45,106,79,0.1);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .service-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.2rem; }
+  .service-price {
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--accent);
+  }
+  .service-price small { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+
+  .service-card.featured {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--white);
+  }
+  .service-card.featured::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .service-card.featured .service-icon { background: rgba(255,255,255,0.1); }
+  .service-card.featured p { color: rgba(255,255,255,0.65); }
+  .service-card.featured .service-price { color: var(--gold-light); }
+  .service-card.featured .service-tag {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    background: var(--gold); color: var(--ink);
+    font-size: 0.7rem; font-weight: 700;
+    padding: 0.2rem 0.6rem; border-radius: 100px;
+  }
+
+  /* 3-НДФЛ MODULE */
+  .ndfl-section { background: var(--ink); color: var(--white); border-radius: 32px; margin: 0 5% 80px; padding: 60px; }
+  .ndfl-section .section-label { color: var(--gold-light); }
+  .ndfl-section .section-title { color: var(--white); }
+  .ndfl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 2.5rem; }
+  .ndfl-steps { display: flex; flex-direction: column; gap: 1.2rem; }
+  .ndfl-step {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.1rem 1.3rem;
+    background: rgba(255,255,255,0.07);
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .step-num {
+    width: 32px; height: 32px;
+    background: var(--gold); color: var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .step-content strong { display: block; font-size: 0.95rem; margin-bottom: 0.2rem; }
+  .step-content span { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+
+  .ndfl-cta-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+  }
+  .ndfl-price-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 700;
+    color: var(--gold-light);
+    margin: 1rem 0 0.25rem;
+  }
+  .ndfl-price-sub { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 2rem; }
+  .ndfl-features { list-style: none; text-align: left; margin-bottom: 2rem; }
+  .ndfl-features li {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.88rem; padding: 0.4rem 0;
+    color: rgba(255,255,255,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .ndfl-features li::before { content: '✓'; color: var(--gold-light); font-weight: 700; }
+  .btn-gold {
+    background: var(--gold); color: var(--ink);
+    border: none; border-radius: 10px;
+    padding: 0.9rem 2rem;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    cursor: pointer; width: 100%;
+    transition: all 0.2s;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* HOW IT WORKS */
+  .how-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; margin-top: 3rem;
+    position: relative;
+  }
+  .how-grid::before {
+    content: '';
+    position: absolute; top: 28px; left: 10%; right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--border));
+    z-index: 0;
+  }
+  .how-step { text-align: center; position: relative; z-index: 1; }
+  .how-num {
+    width: 56px; height: 56px;
+    background: var(--accent);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    margin: 0 auto 1.2rem;
+    box-shadow: 0 0 0 6px var(--warm);
+  }
+  .how-step h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .how-step p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* REVIEWS */
+  .reviews { background: var(--white); }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .review-card {
+    background: var(--card-bg);
+    border-radius: 18px; padding: 1.8rem;
+    border: 1px solid var(--border);
+  }
+  .review-stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .review-text { font-size: 0.92rem; line-height: 1.75; color: #4a5568; margin-bottom: 1.2rem; font-style: italic; }
+  .review-author { display: flex; align-items: center; gap: 0.75rem; }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 0.9rem;
+  }
+  .author-name { font-size: 0.9rem; font-weight: 700; }
+  .author-role { font-size: 0.78rem; color: var(--muted); }
+
+  /* FAQ */
+  .faq-list { max-width: 720px; margin: 3rem auto 0; }
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 14px; margin-bottom: 0.75rem;
+    overflow: hidden; background: var(--white);
+  }
+  .faq-q {
+    padding: 1.2rem 1.5rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    font-weight: 600; font-size: 0.95rem;
+    transition: background 0.2s;
+    user-select: none;
+  }
+  .faq-q:hover { background: var(--card-bg); }
+  .faq-arrow { font-size: 0.75rem; transition: transform 0.3s; color: var(--accent); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s;
+    font-size: 0.9rem; color: var(--muted); line-height: 1.7;
+    padding: 0 1.5rem;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.2rem; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  /* CONTACT */
+  .contact { background: var(--card-bg); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem; }
+  .contact-info p { color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; font-size: 0.95rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.75rem;
+    text-decoration: none; color: var(--ink);
+    font-size: 0.95rem; font-weight: 500;
+    padding: 0.9rem 1.2rem;
+    background: var(--white); border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateX(4px); }
+  .contact-link .link-icon { font-size: 1.3rem; }
+
+  .contact-form-box {
+    background: var(--white);
+    border-radius: 20px; padding: 2rem;
+    border: 1px solid var(--border);
+  }
+  .contact-form-box h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--muted); }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: 'Golos Text', sans-serif; font-size: 0.92rem;
+    background: var(--card-bg); color: var(--ink);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { resize: none; height: 90px; }
+  .form-note { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
+  .form-note strong { color: var(--accent); }
+  .btn-submit {
+    width: 100%; padding: 0.9rem;
+    background: var(--accent); color: var(--white);
+    border: none; border-radius: 10px;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-submit:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,106,79,0.25); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.6);
+    padding: 2.5rem 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--gold-light); }
+  footer p { font-size: 0.82rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero, .about, .ndfl-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero { padding-top: 100px; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .how-grid::before { display: none; }
+    .nav-links { display: none; }
+    .ndfl-section { margin: 0 3% 60px; padding: 40px 30px; }
+    .floating-card { display: none; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 60px 4%; }
+    .how-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .trust-bar { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Оксана <span>Камалова</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Обо мне</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#ndfl">3-НДФЛ</a></li>
+    <li><a href="#reviews">Отзывы</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Связаться</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Налоговый консультант · Челябинск</div>
+    <h1 class="hero-title">
+      Ваши налоги —<br>под <em>надёжным</em><br>контролем
+    </h1>
+    <p class="hero-sub">
+      Помогаю разобраться с налогами без стресса и очередей. 
+      Консультирую понятным языком, заполняю 3-НДФЛ быстро и правильно.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">📞 Получить консультацию</a>
+      <a href="#ndfl" class="btn-secondary">Заказать 3-НДФЛ</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Деклараций сдано</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5 лет</div>
+        <div class="stat-label">Опыт работы</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Без ошибок</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="photo-frame">
+      <div class="photo-placeholder">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="28" r="18" fill="currentColor" opacity="0.4"/>
+          <ellipse cx="40" cy="68" rx="30" ry="18" fill="currentColor" opacity="0.3"/>
+        </svg>
+        <p>Ваше фото<br>здесь</p>
+      </div>
+    </div>
+
+    <div class="floating-card card-left">
+      <div class="fc-icon">💰</div>
+      <div class="fc-label">Возврат за год</div>
+      <div class="fc-value">до 52 000 ₽</div>
+    </div>
+    <div class="floating-card card-right">
+      <div class="fc-icon">⚡</div>
+      <div class="fc-label">Срок подготовки</div>
+      <div class="fc-value">1–2 дня</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>🎓</span><span>Диплом налогового консультанта</span></div>
+  <div class="trust-item"><span>🔒</span><span>Конфиденциальность данных</span></div>
+  <div class="trust-item"><span>✅</span><span>Оплата после результата</span></div>
+  <div class="trust-item"><span>📍</span><span>Онлайн — вся Россия</span></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-photo">👩‍💼</div>
+  <div class="about-text">
+    <div class="section-label">Обо мне</div>
+    <h2 class="section-title">Я решаю налоговые вопросы — вы занимаетесь жизнью</h2>
+    <p>Меня зовут Оксана Камалова. Я сертифицированный налоговый консультант с опытом более 5 лет. За это время я помогла сотням людей вернуть деньги от государства и разобраться в сложных налоговых ситуациях.</p>
+    <p>Я не работаю по шаблону — каждый случай разбираю индивидуально. Говорю на понятном языке, без сложных терминов. Со мной можно просто посоветоваться — как с хорошим знакомым, который разбирается в налогах.</p>
+    <div class="about-perks">
+      <div class="perk">
+        <div class="perk-icon">🎯</div>
+        <div class="perk-text">
+          <strong>Нахожу все вычеты</strong>
+          <span>Которые вам положены по закону — за лечение, обучение, квартиру, детей</span>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">⚡</div>
+        <div class="perk-text">
+          <strong>Работаю быстро</strong>
+          <span>3-НДФЛ готова за 1–2 рабочих дня после получения документов</span>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">🤝</div>
+        <div class="perk-text">
+          <strong>Всегда на связи</strong>
+          <span>Отвечаю в течение дня, сопровождаю до получения результата</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div style="text-align:center; max-width:600px; margin:0 auto;">
+    <div class="section-label">Услуги</div>
+    <h2 class="section-title">Что я могу для вас сделать</h2>
+    <p class="section-sub">Помогаю физическим лицам и предпринимателям решить любые вопросы с налогами</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">💬</div>
+      <h3>Консультация</h3>
+      <p>Разберём вашу ситуацию, отвечу на вопросы по налогам, вычетам, проверкам ФНС. Работаю онлайн — звонок или переписка.</p>
+      <div class="service-price">от 500 ₽ <small>/ разовая</small></div>
+    </div>
+
+    <div class="service-card featured">
+      <div class="service-tag">Популярно</div>
+      <div class="service-icon">📄</div>
+      <h3>Декларация 3-НДФЛ</h3>
+      <p style="color:rgba(255,255,255,0.65)">Заполню декларацию под ключ — вы только присылаете документы. Вычеты за лечение, обучение, имущество, ИИС.</p>
+      <div class="service-price">от 800 ₽ <small style="color:rgba(255,255,255,0.5)">/ декларация</small></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Имущественный вычет</h3>
+      <p>Помогу вернуть до 260 000 ₽ при покупке жилья. Подготовлю все документы, проконтролирую выплату.</p>
+      <div class="service-price">от 1 500 ₽ <small>/ под ключ</small></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🏢</div>
+      <h3>Для самозанятых и ИП</h3>
+      <p>Помогу разобраться с отчётностью, выбрать режим налогообложения, сдать декларацию без штрафов.</p>
+      <div class="service-price">от 1 000 ₽ <small>/ консультация</small></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">⚖️</div>
+      <h3>Налоговые проверки</h3>
+      <p>Помогу ответить на требования ФНС, подготовить пояснения, избежать штрафов при камеральной проверке.</p>
+      <div class="service-price">от 2 000 ₽ <small>/ сопровождение</small></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <h3>Налоговое планирование</h3>
+      <p>Анализ вашей ситуации и план — как законно платить меньше налогов в будущем.</p>
+      <div class="service-price">от 3 000 ₽ <small>/ план</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3-НДФЛ MODULE -->
+<div class="ndfl-section" id="ndfl">
+  <div class="ndfl-grid">
+    <div>
+      <div class="section-label">Быстро и без очередей</div>
+      <h2 class="section-title" style="font-size:2rem">Заказать 3-НДФЛ онлайн</h2>
+      <p style="color:rgba(255,255,255,0.65); margin-bottom:2rem; font-size:0.95rem; line-height:1.7">
+        Всё просто: вы присылаете документы, я заполняю декларацию. 
+        Не нужно никуда ехать и стоять в очередях.
+      </p>
+      <div class="ndfl-steps">
+        <div class="ndfl-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Оставьте заявку</strong>
+            <span>Напишите в Telegram или заполните форму на сайте</span>
+          </div>
+        </div>
+        <div class="ndfl-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Пришлите документы</strong>
+            <span>Справка 2-НДФЛ + документы на вычет (фото или PDF)</span>
+          </div>
+        </div>
+        <div class="ndfl-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Получите готовую декларацию</strong>
+            <span>За 1–2 рабочих дня. Я заполняю, вы проверяете и подаёте</span>
+          </div>
+        </div>
+        <div class="ndfl-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Оплатите после получения</strong>
+            <span>Перевод на карту. Только когда всё устраивает</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ndfl-cta-box">
+      <div style="font-size:2.5rem">📄</div>
+      <div class="ndfl-price-main">от 800 ₽</div>
+      <div class="ndfl-price-sub">за одну декларацию · оплата после получения</div>
+      <ul class="ndfl-features">
+        <li>Вычет за лечение и медикаменты</li>
+        <li>Вычет за обучение (своё и детей)</li>
+        <li>Имущественный вычет (квартира)</li>
+        <li>Вычет по ИИС</li>
+        <li>Продажа квартиры / авто</li>
+        <li>Проверка и ответ на вопросы ФНС</li>
+      </ul>
+      <a href="#contact" class="btn-gold">Заказать декларацию →</a>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div style="text-align:center; max-width:600px; margin:0 auto;">
+    <div class="section-label">Как работаем</div>
+    <h2 class="section-title">Всё просто — без лишних шагов</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <h4>Связываетесь со мной</h4>
+      <p>В Telegram, WhatsApp или через форму на сайте. Отвечаю в течение дня.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <h4>Разбираем ситуацию</h4>
+      <p>Выясняем что нужно, какие документы есть, какой результат ожидаете.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <h4>Я всё подготавливаю</h4>
+      <p>Заполняю декларацию или готовлю ответ на ваш вопрос. Быстро и аккуратно.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">4</div>
+      <h4>Вы платите и довольны</h4>
+      <p>Оплата переводом после получения результата. Никакой предоплаты.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div style="text-align:center; max-width:600px; margin:0 auto;">
+    <div class="section-label">Отзывы</div>
+    <h2 class="section-title">Что говорят клиенты</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">«Обратилась за возвратом налога за лечение зубов. Оксана объяснила всё понятно, собрала документы и за два дня прислала готовую декларацию. Вернула 14 000 ₽!»</p>
+      <div class="review-author">
+        <div class="author-avatar">М</div>
+        <div>
+          <div class="author-name">Марина К.</div>
+          <div class="author-role">Возврат за лечение</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">«Продавал квартиру и боялся что придётся платить большой налог. Оксана нашла законный способ уменьшить сумму. Сэкономила мне более 80 000 ₽!»</p>
+      <div class="review-author">
+        <div class="author-avatar">А</div>
+        <div>
+          <div class="author-name">Алексей В.</div>
+          <div class="author-role">Продажа недвижимости</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">«Сдаю квартиру в аренду, никогда не знала как правильно платить налоги. Оксана всё объяснила, помогла сдать декларацию. Теперь всё делаю через неё каждый год.»</p>
+      <div class="review-author">
+        <div class="author-avatar">Е</div>
+        <div>
+          <div class="author-name">Елена Р.</div>
+          <div class="author-role">Аренда квартиры</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div style="text-align:center; max-width:600px; margin:0 auto;">
+    <div class="section-label">Частые вопросы</div>
+    <h2 class="section-title">FAQ</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">Какие документы нужны для 3-НДФЛ? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Основное — справка 2-НДФЛ от работодателя (берётся в бухгалтерии или в личном кабинете ФНС). Плюс документы на вычет: договор с больницей/вузом, чеки об оплате, договор купли-продажи квартиры. Точный список — уточню после того как расскажете ситуацию.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Сколько можно вернуть за лечение? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Социальный вычет — до 150 000 ₽ в год (с 2024 года). Возврат составит 13% от этой суммы — до 19 500 ₽. За дорогостоящее лечение (операции, протезирование зубов и др.) — вычет без ограничений.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">За какой период можно подать декларацию? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Декларацию для получения вычета можно подать за последние 3 года. То есть прямо сейчас можно вернуть налог за 2022, 2023 и 2024 годы. Не откладывайте — каждый год сумма сгорает.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Как происходит оплата? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Только после того как вы получили готовую декларацию и всё проверили. Перевод на карту. Никакой предоплаты — вы ничем не рискуете.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Работаете ли вы дистанционно? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Да, работаю онлайн — принимаю клиентов со всей России. Общение в Telegram, документы можно прислать фото или PDF. Личная встреча не нужна.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Что если ФНС пришлёт вопросы по декларации? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Помогу подготовить ответ на требование налоговой. Сопровождаю клиентов до полного получения вычета. Это входит в стоимость услуги.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div style="text-align:center; max-width:600px; margin:0 auto;">
+    <div class="section-label">Связаться</div>
+    <h2 class="section-title">Давайте разберёмся с вашей ситуацией</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Напишите мне удобным способом</h3>
+      <p>Отвечаю в течение дня. Первичная консультация — бесплатно. Расскажите свою ситуацию и я скажу чем могу помочь.</p>
+      <div class="contact-links">
+        <a href="https://t.me/oksana_kamalova" class="contact-link">
+          <span class="link-icon">✈️</span>
+          <span>Telegram — @oksana_kamalova</span>
+        </a>
+        <a href="https://wa.me/79000000000" class="contact-link">
+          <span class="link-icon">📱</span>
+          <span>WhatsApp — написать сообщение</span>
+        </a>
+        <a href="mailto:oksana@example.com" class="contact-link">
+          <span class="link-icon">📧</span>
+          <span>Email — oksana@example.com</span>
+        </a>
+      </div>
+      <div style="margin-top:1.5rem; padding:1.2rem; background:rgba(45,106,79,0.08); border-radius:14px; border:1px solid rgba(45,106,79,0.2);">
+        <div style="font-size:0.82rem; color:var(--muted); margin-bottom:0.3rem;">⏰ Время работы</div>
+        <div style="font-size:0.95rem; font-weight:600;">Пн–Пт: 9:00 – 20:00</div>
+        <div style="font-size:0.88rem; color:var(--muted);">Сб: 10:00 – 16:00 · Вс: выходной</div>
+      </div>
+    </div>
+
+    <div class="contact-form-box">
+      <h3>Оставить заявку</h3>
+      <div class="form-group">
+        <label>Ваше имя</label>
+        <input type="text" placeholder="Как вас зовут?">
+      </div>
+      <div class="form-group">
+        <label>Telegram или телефон</label>
+        <input type="text" placeholder="@username или +7...">
+      </div>
+      <div class="form-group">
+        <label>Нужная услуга</label>
+        <select>
+          <option>Заполнение 3-НДФЛ</option>
+          <option>Налоговая консультация</option>
+          <option>Имущественный вычет</option>
+          <option>Для самозанятых / ИП</option>
+          <option>Налоговая проверка</option>
+          <option>Другое</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Кратко опишите ситуацию</label>
+        <textarea placeholder="Расскажите что случилось или что хотите сделать..."></textarea>
+      </div>
+      <p class="form-note">Отвечу в Telegram или позвоню — как вам удобнее. <strong>Первичная консультация бесплатно.</strong></p>
+      <button class="btn-submit" onclick="this.textContent='✓ Заявка отправлена!'; this.style.background='#40916c'">
+        Отправить заявку →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Оксана <span>Камалова</span></div>
+  <p>Налоговый консультант · Онлайн по всей России</p>
+  <p>© 2025 · Все права защищены</p>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .review-card, .how-step, .perk').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
